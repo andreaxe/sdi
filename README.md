@@ -33,7 +33,7 @@ Apresentar uma versão para android; iphone; ou windows mobile da aplicação.
 
 Docker 
 ------------------
-Docker 
+docker run --name app -d -p 8010:80 -v home/afg/Documents/SDI:/var/www/app/ romeoz/docker-apache-php
 
 Example:
 ===
