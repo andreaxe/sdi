@@ -1,9 +1,39 @@
-PHP-TCP-Socket-Client-Server
+Trabalho de SDI
 ============================
+	
+Tema:
+Interface “mobile first” para SGBD utilizando sockets
 
-A simple stripped down PHP TCP socket server and client, that communicates in JSON format; wrapped in a handy class. 
-Server will parse the JSON and call controller based on route, currently its very bare and does nothing but sends JSON back.
-In later commits ill add something more interesting. 
+Objetivo:
+
+1. Pretende-se criar um interface de utilizador, privilegiando o conceito “mobile first” que, através da utilização de sockets, permita disponibilizar métodos para leitura, escrita e atualização de dados numa base de dados de gestão de eventos e provas desportivas.
+
+Requisitos:
+1. A prova de conceito deverá ser disponibilizada com um protótipo que permita testar os seguintes métodos:
+2. autenticação do utilizador;
+3. listagem de provas disponíveis;
+4. inscrição de utilizador em provas;
+5. listagem das provas que o utilizador se encontra inscrito;
+6. dados do utilizador.
+
+A aplicação servidor deverá permitir acesso concorrente.
+
+As operações que impliquem alterações no SGBD deverão ser realizadas por "datastream". As operações que não impliquem alterações no SGBD poderão ser efetuadas através de "datagram".
+
+Aspetos a Avaliar:
+
+1. Interface do utilizador;
+2. métodos utilizados;
+3. abordagem na utilização dos sockets;
+4. protocolo da aplicação; concorrência;
+5. eficiência da aplicação.
+
+Valorização:
+Apresentar uma versão para android; iphone; ou windows mobile da aplicação.
+
+Docker 
+------------------
+Docker 
 
 Example:
 ===
