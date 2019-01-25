@@ -1,0 +1,17 @@
+<?php 
+class indexController{
+	
+	function index(){
+		
+		$client = array(
+			'ip'=>$_SERVER['REMOTE_ADDR'],
+			'port'=>$_SERVER['REMOTE_PORT'],
+			'time'=>time(),
+            'teste' => 'isto é um teste'
+		);
+			
+		return json_encode($client);
+	}
+	
+}
+?>
