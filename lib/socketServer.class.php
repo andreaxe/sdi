@@ -1,4 +1,8 @@
-<?php 
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 Class socketServer extends socket{
 
 	function __construct($ip = "0.0.0.0", $port = 4000, $auth = false) {
@@ -60,8 +64,6 @@ Class socketServer extends socket{
 						try {
 							//parse input for json - throw exception
 							$input = $this->json_validate($input);
-							print_r($input);
-
 							//let do something with input object
 							$response = $this->run_controller($input);
 
@@ -105,6 +107,12 @@ Class socketServer extends socket{
 		echo str_repeat(PHP_EOL,4092).$string.'<br>'.chr(0);
 	}
 
+    function console_log( $data ){
+        echo '<script>';
+        echo 'console.log('. json_encode( $data ) .')';
+        echo '</script>';
+    }
+
 	///FUNCTIONS - For Debugging
 	function socket_error($error, $socket) {
 		$errMsg = socket_strerror(socket_last_error($socket));
@@ -129,7 +137,7 @@ Class socketServer extends socket{
 			require_once($controller);
 			$class = $route->controller.'Controller';
 			if(class_exists($class)) {
-				$controller = new $class();
+				$controller = new $class($route);
 			}
 		} else {
 			require_once('./lib/serverControllers/not_foundController.php');

@@ -37,11 +37,6 @@ class socket{
 	
 	function report(){
 		echo '
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>'.__CLASS__.' report</title>
 <style type="text/css">
 * {
 	padding:0;
@@ -58,12 +53,9 @@ div.log span {
 	font-family: monospace;
 }
 </style>
-</head>
 
-<body>
 '.implode(PHP_EOL, $this->log).'
-</body>
-</html>';
+';
 	}
 
 	protected function log($reason, $extra, $return = false){

@@ -1,7 +1,7 @@
 <?php 
 Class socketClient extends socket{
 
-	function __construct($ip = "127.0.0.1", $port = 4000, $auth = false){
+	function __construct($ip = "127.0.0.1", $port = 8000, $auth = false){
 		parent::__construct($ip, $port, $auth);
 	}
 
@@ -9,7 +9,7 @@ Class socketClient extends socket{
 		try{
 			// create socket
 			if($this->socket = $this->socket_create(AF_INET, SOCK_STREAM, SOL_TCP)){
-				$this->log("Client: socket::socket_create()", "socket created");
+				$this->log("Client: socket::socket_create()", "socket created: ".time());
 			}else{
 				$this->log("Client: socket::socket_create()", "error creating socket");
 			}

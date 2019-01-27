@@ -33,7 +33,8 @@ Apresentar uma versão para android; iphone; ou windows mobile da aplicação.
 
 Docker 
 ------------------
-docker run --name app -d -p 8010:80 -v home/afg/Documents/SDI:/var/www/app/ romeoz/docker-apache-php
+1. docker run --name app -d -p 8010:80 -v home/afg/Documents/SDI:/var/www/app/ romeoz/docker-apache-php
+2. docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql:latest
 
 Example:
 ===
