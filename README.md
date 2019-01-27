@@ -77,3 +77,6 @@ Interface gráfica
 ![image](https://user-images.githubusercontent.com/9929973/51805947-9c431d80-226b-11e9-9b21-0f8cfe9067a3.png)
 
 ![image](https://user-images.githubusercontent.com/9929973/51804651-c12f9480-225b-11e9-9783-97d4138b48bf.png)
+
+![image](https://user-images.githubusercontent.com/9929973/51805989-3905bb00-226c-11e9-9a17-a28942895d10.png)
+
