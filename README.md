@@ -47,8 +47,9 @@ Cliente cria um array com a informação do Controlador e método a ser evocado 
     require('./lib/socketClient.class.php');
     
     $socket = new socketClient('127.0.0.1', 8000);
-    // Sem necessidade envio de argumentos
+    // sem envio de argumentos 
     $packet = array('controller'=> 'index', 'action' => 'provaEvento');
+    // com argumentos
     $packet = array('controller' => 'index', 'action' => 'login', 
                     'args' => ['email'=> $_POST['email'], 'pass' => $_POST['password']]);
     $results = json_decode($socket->send(json_encode($packet)));
@@ -69,3 +70,5 @@ Com argumentos
     
     new socketServer("0.0.0.0", 54321);
     ?>
+
+![image](https://user-images.githubusercontent.com/9929973/51804651-c12f9480-225b-11e9-9783-97d4138b48bf.png)
