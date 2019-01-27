@@ -36,29 +36,30 @@ Docker
 1. docker run --name app -d -p 8010:80 -v home/afg/Documents/SDI:/var/www/app/ romeoz/docker-apache-php
 2. docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql:latest
 
-Example:
-===
+Exemplos:
+=========
+
 **./index.php (Client)**
-Client builds and sends a JSON encoded packet.
+Cliente cria um array com a informação do Controlador e método a ser evocado no servidor
 
     <?php
     require('./lib/socket.class.php');
     require('./lib/socketClient.class.php');
     
-    $socket = new socketClient('127.0.0.1', 54321);
-    
-    $packet = array('controller'    => 'index',
-    				'action'	    => 'index',
-    				'subaction'	    => '',
-    				'subaction_id'  => '',
-    				'time'		    => time(),
-    				'ip'		    => $_SERVER['SERVER_ADDR'],
-    				);
+    $socket = new socketClient('127.0.0.1', 8000);
+    // Sem necessidade envio de argumentos
+    $packet = array('controller'=> 'index', 'action' => 'provaEvento');
+    $packet = array('controller' => 'index', 'action' => 'login', 
+                    'args' => ['email'=> $_POST['email'], 'pass' => $_POST['password']]);
+    $results = json_decode($socket->send(json_encode($packet)));
     
     $response = $socket->send(json_encode($packet));
     
     $socket->report();
     ?>
+
+Com argumentos
+------------------
 
 **./server.php (Server)**
     
