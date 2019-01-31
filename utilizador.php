@@ -16,6 +16,27 @@ $packet = array('controller'=> 'utilizador', 'action' => 'consultaUtilizador',
     'args' => ['idu'=> $_SESSION['idu']]);
 $results = json_decode($socket->send(json_encode($packet)));
 
+foreach ($results as $row) {
+    $nome = $row->nome;
+    $nif = $row->nif;
+    $datan = $row->datan;
+    $email = $row->email;
+    $cc = $row->cc;
+    $telef = $row->telef;
+}
+
+if(isset($_POST['dados_utilizador'])){
+
+    $packet = array('controller'=> 'utilizador', 'action' => 'editaUtilizador',
+        'args' => ['uid'=> $_SESSION['idu'], 'nome' => $_POST['nome'], 'nif'=> $_POST['nif'], 'datan' => $_POST['datan'],
+            'cc'=> $_POST['cc'], 'telef' => $_POST['telef'], 'email' => $_POST['email']]);
+    $results = json_decode($socket->send(json_encode($packet)));
+
+    if($results->success){
+        header('Location: '.$_SERVER['REQUEST_URI']);
+    }
+
+}
 
 ?>
 <!doctype html>
@@ -66,7 +87,7 @@ $results = json_decode($socket->send(json_encode($packet)));
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img class="img-responsive" src="assets/img/run_logo.png" /></a>
+            <a class="navbar-brand" href="index.php"><img class="img-responsive" src="assets/img/run_logo.png" /></a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
@@ -116,6 +137,36 @@ $results = json_decode($socket->send(json_encode($packet)));
                 <?php } ?>
                 </tbody>
             </table>
+        </div>
+        <div class="col-sm-12">
+            <h3 class="titulo">Editar dados de utilizador</h3>
+            <form action="" method="POST">
+                <div class="form-group">
+                    <label for="Nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" value="<?= $nome ?>">
+                </div>
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input type="email" class="form-control" name="email" value="<?= $email ?>">
+                </div>
+                <div class="form-group">
+                    <label for="Nif">Nif</label>
+                    <input type="text" class="form-control" name="nif" value="<?= $nif ?>">
+                </div>
+                <div class="form-group">
+                    <label for="datan">Data de Nascimento</label>
+                    <input type="date" class="form-control" name="datan" value="<?= $datan ?>">
+                </div>
+                <div class="form-group">
+                    <label for="cc">Cartão de cidadão</label>
+                    <input type="text" class="form-control" name="cc" value="<?= $cc ?>">
+                </div>
+                <div class="form-group">
+                    <label for="Telefone">Telefone</label>
+                    <input type="text" class="form-control" name="telef" value="<?= $telef ?>">
+                </div>
+                <button type="submit" name="dados_utilizador" class="btn btn-success">Submeter</button>
+            </form>
         </div>
     </div>
 

@@ -7,20 +7,22 @@ error_reporting(E_ALL);
 class utilizadorController{
 
     public $args;
+    public $connection;
 
     public function  __construct($args)
     {
         $this->args = $args;
+        $database = new ConnectDB();
+        $this->connection = $database->db_connection;
     }
 
     public function consultaUtilizador()
     {
-        $connection = ConnectDB::getInstance()->getConnection();
         $results =  array();
 
         $query = "SELECT * from utilizador where idu =".$this->args->args->idu;
 
-        if ($result = mysqli_query( $connection, $query )){
+        if ($result = mysqli_query( $this->connection, $query )){
             while ($row = mysqli_fetch_array($result)) {
                 $row_array['idu'] = $row['idu'];
                 $row_array['nome'] = $row['nome'];
@@ -34,7 +36,25 @@ class utilizadorController{
                 array_push($results,$row_array);
             }
         }
-        mysqli_close($connection);
         return json_encode($results);
+    }
+
+    public function editaUtilizador(){
+
+        $nome = $this->args->args->nome;
+        $nif = $this->args->args->nif;
+        $datan = $this->args->args->datan;
+        $cc = $this->args->args->cc;
+        $telef = $this->args->args->telef;
+        $uid = $this->args->args->uid;
+        $email = $this->args->args->email;
+
+        $query = "UPDATE utilizador SET email ='".$email."', nome ='".$nome."', nif = '".$nif."', datan = '".$datan."',  cc = '".$cc."', telef = '".$telef."' WHERE idu = '".$uid."'";
+
+        if(mysqli_query($this->connection, $query)){
+            return json_encode(array('success'=> 1));
+        }
+        return json_encode(array('success'=> 0));
+
     }
 }

@@ -5,13 +5,15 @@ if (!isset($_SESSION['token'])) {
     header("location:index.php");
 }
 
-$connection = ConnectDB::getInstance()->getConnection();
+$database = new ConnectDB();
+$connection = $database->db_connection;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require('./lib/socket.class.php');
 require('./lib/socketClient.class.php');
 $socket = new socketClient('127.0.0.1', 8000);
+
 //die();
 //if(empty($socket->response)){
 //    header('Location: index.php');
@@ -21,41 +23,19 @@ $packet = array('controller'=> 'prova', 'action' => 'provaEvento',
     'args' => ['idu'=> $_SESSION['idu']]);
 $results = json_decode($socket->send(json_encode($packet)));
 
-//$socket->close();
-
-function verificar_prova_inscricao($prova, $user, $connection)
-{
-/*
- * O utilizador apenas pode inscrever-se numa única prova de um dado evento.
- */
-    $query = "SELECT * from inscricoes INNER JOIN prova on prova.idp = inscricoes.idprova where idutilizador=".$user." ";
-    $eventos = mysqli_query($connection, $query)->fetch_all();
-
-    if(empty($eventos)){
-      return true;
-    }
-
-    $evento = mysqli_query($connection, "SELECT idevento FROM prova where prova.idp =".$prova)->fetch_row();
-    foreach($eventos as $value){
-      if($evento[0] == $value[7]){
-        return false;
-      }
-    }
-
-    return true;
-}
-$query            = "SELECT * FROM prova INNER JOIN evento ON evento.ide = prova.idevento";
-//$results          = mysqli_query($connection, $query)<;<
-$query_inscricoes = "SELECT * FROM inscricoes INNER JOIN prova on prova.idp = inscricoes.idprova INNER JOIN evento on 
-               evento.ide = prova.idevento where idutilizador = ".$_SESSION['idu'];
-$inscricoes       = mysqli_query($connection, $query_inscricoes);
 
 if(isset($_POST['remover_prova'])){
-  $id_utilizador = $_SESSION['idu'];
-  $id_prova = htmlentities($_POST['remover_prova'], ENT_COMPAT, 'UTF-8');
-  $query = "DELETE FROM inscricoes WHERE idutilizador = ".$id_utilizador." and idprova = ".$id_prova.";";
-  return mysqli_query($connection, $query);
 
+    $id_utilizador = $_SESSION['idu'];
+    $id_prova = htmlentities($_POST['remover_prova'], ENT_COMPAT, 'UTF-8');
+    $packet = array('controller'=> 'prova', 'action' => 'removerProva',
+    'args' => ['prova'=> $id_prova, 'user' => $id_utilizador]);
+
+    $results = json_decode($socket->send(json_encode($packet)));
+    if ($results->success){
+        return True;
+    }
+    return False;
 }
 
 if(isset($_POST['prova'])){
@@ -64,12 +44,16 @@ if(isset($_POST['prova'])){
     $prova = htmlentities($_POST['prova'], ENT_COMPAT, 'UTF-8');
     $data = date('Y-m-d');
     // Não percebo muito bem este campo na tabela de inscrições...
-    $limite =date('Y-m-d');
+    $limite = date('Y-m-d');
 
-    if(verificar_prova_inscricao($prova, $id_utilizador, $connection)){
-      header("Content-Type: text/json; charset=utf8");
-      $query = "INSERT INTO inscricoes(idutilizador, idprova, datainsc, datalimite)VALUES('$id_utilizador', '$prova','$data', '$limite')";
-      $inscricao = mysqli_query($connection , $query);
+    $packet = array('controller'=> 'prova', 'action' => 'verificarProvaInscricao',
+        'args' => ['prova'=> $prova, 'user' => $id_utilizador]);
+    $results = json_decode($socket->send(json_encode($packet)));
+
+    if($results->success){
+        header("Content-Type: text/json; charset=utf8");
+        $query = "INSERT INTO inscricoes(idutilizador, idprova, datainsc, datalimite)VALUES('$id_utilizador', '$prova','$data', '$limite')";
+        $inscricao = mysqli_query($connection , $query);
 
       if($inscricao)
       {
@@ -77,17 +61,11 @@ if(isset($_POST['prova'])){
       }
       else
       {
-//        echo json_encode(array("success" => false, "errors" => "O utilizador já se encontra inscrito numa prova do mesmo evento"));
-//        exit();
+        header("Refresh:0");
       }
     }
-    $fp = fopen('lidn.txt', 'a');
-    fwrite($fp, $prova);
-    fclose($fp);
-
-    echo json_encode(array("success" => false, "errors" => "O utilizador já se encontra inscrito numa prova do mesmo evento"));
+    header('Location: '.$_SERVER['REQUEST_URI']);
 }
-mysqli_close($connection);
 ?>
 <!doctype html>
 <html lang="en">
@@ -203,7 +181,7 @@ mysqli_close($connection);
   <div class="row">
     <div class="col-sm-12">
       <h3 class="titulo">Lista de Provas onde se encontra inscrito</h3>
-        <?php if (empty($inscricoes)){ ?>
+        <?php if (empty($results->inscrito)){ ?>
             <table id="inscrito" class="hide table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
         <tr>

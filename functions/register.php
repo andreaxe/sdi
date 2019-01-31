@@ -11,7 +11,6 @@ $data['email'] = $_POST['email'];
 $data['password'] = $_POST['password'];
 $data['password_confirmation'] = $_POST['password_confirmation'];*/
 
-print_r("teste");
 if($_POST['password'] !== $_POST['password_confirmation']){
     $msg = "As passwords não coincidem!";
     header( "Location: index.php" ); die;
@@ -33,7 +32,6 @@ function createUser()
 
     $response = json_decode($socket->send(json_encode($packet)));
 
-    print_r($response);
     if($response->success == 1)
     {
         echo "<div class=\"alert alert-success\">";

@@ -2,38 +2,31 @@
 
 
 class ConnectDB{
-    /***
-     * Esta classe faz uso do Singleton design pattern
-     * @var string
-     */
+
+    public $db_connection = false;
+    public $logs = array();
     private $_servername = "172.17.0.1";
     private $_username = "andre";
     private $_password = "andre";
     private static $_instance; //The single instance
     private $_database = 'cvp';
-    private $_connection;
 
-    private function __construct() {
-        $this->_connection = new mysqli($this->_servername, $this->_username,
-            $this->_password, $this->_database);
 
-        // Error handling
-        if(mysqli_connect_error()) {
-            trigger_error("Failed to connect to MySQL: " . mysqli_connect_error(),
-                E_USER_ERROR);
+    public function __construct() {
+        $this->logs[] = "Attempting to connect to the database.";
+
+        try{
+            $this->db_connection = new mysqli($this->_servername, $this->_username,
+                $this->_password, $this->_database);
+            $this->logs[] = "A new database connection has been established.";
+        }
+        catch (mysqli_sql_exception $e) {
+            $this->logs[] = "A new database connection could not be established.";
         }
     }
-    // Magic method clone is empty to prevent duplication of connection
-    private function __clone() { }
-    // Get mysqli connection
-    public function getConnection() {
-        return $this->_connection;
-    }
 
-    public static function getInstance() {
-        if(!self::$_instance) { // If no instance then make one
-            self::$_instance = new self();
-        }
-        return self::$_instance;
-    }
+//    public function __destruct()
+//    {
+//        $this->db_connection->close();
+//    }
 }

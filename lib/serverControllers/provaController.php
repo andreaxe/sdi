@@ -7,41 +7,59 @@ error_reporting(E_ALL);
 class provaController{
 
     public $args;
+    public $connection;
 
     public function  __construct($args)
     {
         $this->args = $args;
+        $database = new ConnectDB();
+        $this->connection = $database->db_connection;
     }
 
-    public function verificar_prova_inscricao($prova, $user, $connection)
+    public function verificarProvaInscricao()
     {
         /*
          * O utilizador apenas pode inscrever-se numa única prova de um dado evento.
          */
+        $user = $this->args->args->user;
+        $prova = $this->args->args->prova;
+
         $query = "SELECT * from inscricoes INNER JOIN prova on prova.idp = inscricoes.idprova where idutilizador=".$user." ";
-        $eventos = mysqli_query($connection, $query)->fetch_all();
+        $eventos = mysqli_query($this->connection, $query)->fetch_all();
 
         if(empty($eventos)){
-            return true;
+            return json_encode(array('success'=> 1));
         }
 
-        $evento = mysqli_query($connection, "SELECT idevento FROM prova where prova.idp =".$prova)->fetch_row();
+        $evento = mysqli_query($this->connection, "SELECT idevento FROM prova where prova.idp =".$prova)->fetch_row();
         foreach($eventos as $value){
             if($evento[0] == $value[7]){
-                return false;
+                return json_encode(array('success'=> 0));
             }
         }
 
-        return true;
+        return json_encode(array('success'=> 1));
+    }
+
+    public function removerProva(){
+
+        $id_utilizador = $this->args->args->user;
+        $id_prova = $this->args->args->prova;
+        $query = "DELETE FROM inscricoes WHERE idutilizador = ".$id_utilizador." and idprova = ".$id_prova.";";
+        if(mysqli_query($this->connection, $query)){
+            return json_encode(array('success'=> 1));
+        }
+        return json_encode(array('success'=> 0));
     }
 
     public function provaEvento()
     {
         $query            = "SELECT * FROM prova INNER JOIN evento ON evento.ide = prova.idevento";
-        $connection = ConnectDB::getInstance()->getConnection();
+        $database = new ConnectDB();
+        $connection = $database->db_connection;
         $results = array('provas' => array(), 'inscrito' => array());
 
-        if ($result = mysqli_query( $connection, $query )){
+        if ($result = mysqli_query( $this->connection, $query )){
             while ($row = mysqli_fetch_array($result)) {
 
                 $row_array['idp'] = $row['idp'];
@@ -62,10 +80,6 @@ class provaController{
 
         $query_inscricoes = "SELECT * FROM inscricoes INNER JOIN prova on prova.idp = inscricoes.idprova INNER JOIN evento on 
                evento.ide = prova.idevento where idutilizador = ".$this->args->args->idu;
-
-        $fp = fopen('lidn.txt', 'a');
-        fwrite($fp, $this->args);
-        fclose($fp);
 
         if ($result = mysqli_query( $connection, $query_inscricoes )){
             while ($row = mysqli_fetch_array($result)) {

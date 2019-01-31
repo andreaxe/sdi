@@ -43,20 +43,16 @@ session_start();
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" style="color: #000">Regulamento</a></li>
-				<li>
-					<p class="navbar-btn">
-						<a href="backend.html" class="btn btn-default" style="margin-right: 10px;">Backend</a>
-					</p>
-				</li>
+
 				<li>
 					<p class="navbar-btn">
                         <?php
                         if(!isset($_SESSION['idu'])) { ?>
 						<a href="#" id="login" class="btn btn-success login" style="color: #FFF !important;" data-toggle="modal" data-target="#myModal">Login</a>
                         <?php }  else { ?>
-                            <a href="#" id="login" class="btn btn-success login" style="color: #FFF !important;" data-toggle="modal" data-target="#myModal">Provas</a>
-                            <a href="#" id="login" class="btn btn-success login" style="color: #FFF !important;" data-toggle="modal" data-target="#myModal">Definições</a>
+                            <a href="provas.php" id="login" class="btn btn-success login" style="color: #FFF !important;">Provas</a>
+                            <a href="utilizador.php" id="login" class="btn btn-success login" style="color: #FFF !important;" >Definições</a>
+                            <a href="logout.php" id="login" class="btn btn-danger" style="color: #FFF !important;" >Terminar sessão</a>
                         <?php }?>
 					</p>
 				</li>

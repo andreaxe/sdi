@@ -28,8 +28,8 @@ class indexController{
 
 	function login(){
 
-        $connection = ConnectDB::getInstance()->getConnection();
-        $response = $this->_checkLogin($connection);
+        $connection = new ConnectDB();
+        $response = $this->_checkLogin($connection->db_connection);
         return json_encode($response);
     }
 
@@ -80,21 +80,15 @@ class indexController{
 
     private function _checkLogin($connection)
     {
-        $password = sha1($this->args->args->pass);
+//        $password = sha1($this->args->args->pass);
+        $password = md5($this->args->args->pass);
         $email = $this->args->args->email;
 
         $query = "SELECT * FROM utilizador WHERE email = '".$email."' AND senha ='".$password."';";
 
-        $fp = fopen('lidn.txt', 'a');
-        fwrite($fp, $query);
-        fclose($fp);
-
         $result = mysqli_query($connection, $query);
         $row = mysqli_fetch_object($result);
 
-        $fp = fopen('lidn.txt', 'a');
-        fwrite($fp, $row);
-        fclose($fp);
 
         if(!$row){
             $response = array('success'=> 0, 'msg' => 'No existing user or wrong password',
