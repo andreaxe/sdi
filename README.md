@@ -37,9 +37,9 @@ Para colocar a funcionar este trabalho é preciso tomar os seguintes passos:
  
 * certificar-se que tem o docker instalado;
 * clonar este repositório para o seu computador;
-* Criar o container e correr  através do seguinte comando: $ docker run --name app -d -p 8010:80 -v raiz/do/projecto:/var/www/app/ romeoz/docker-apache-php
-* Registar o id do container na lista através do seguinte comando: $ docker ps
-* docker exec -it {id do cotnainer} bash
+* Criar o container e correr através do seguinte comando: $ docker run --name app -d -p 8010:80 -v raiz/do/projecto:/var/www/app/ romeoz/docker-apache-php
+* Copiar para o clipboard o id do container disponivel na seguinte lista: $ docker ps
+* Aceder ao container através do seguinte comando: docker exec -it **id_do_container** bash
 
 No interior do container correr o servidor:
 * php server.php
@@ -47,9 +47,10 @@ No interior do container correr o servidor:
 Depois de certificar-se que as notas prévias foram cumpridas, abrir o browser e consultar o seguinte endereço:
 
 * http://localhost:8010 
+* registar um utilizador e efectuar o login
 
 Notas prévias:
-* Instalar um servidor mysql e importar o ficheiro 'cvp.sql' 
+* Instalar ou usar um servidor mysql já existente e importar o ficheiro 'cvp.sql' disponivel na raiz do projecto. 
 * Alterar as credenciais de acesso à BD no ficheiro 'ConnectDB.php'
 * Não se esqueça de alterar o caminho **'raiz/do/projecto'** pela raiz do directório onde se encontra o projecto na sua máquina local.
 
@@ -160,7 +161,8 @@ Interface gráfica
 
 ![image](https://user-images.githubusercontent.com/9929973/51805947-9c431d80-226b-11e9-9b21-0f8cfe9067a3.png)
 
-![image](https://user-images.githubusercontent.com/9929973/51804651-c12f9480-225b-11e9-9783-97d4138b48bf.png)
+![image](https://user-images.githubusercontent.com/9929973/52072278-9e172480-257c-11e9-9812-2a8dcdc06da5.png)
 
-![image](https://user-images.githubusercontent.com/9929973/51805989-3905bb00-226c-11e9-9a17-a28942895d10.png)
+![image](https://user-images.githubusercontent.com/9929973/52072418-dae31b80-257c-11e9-91c1-779af1b3ea32.png)
+
 
