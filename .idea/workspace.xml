@@ -5,18 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fe705e91-f0be-43cb-8159-b5ccc0c0315e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConnectDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectDB.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/serverControllers/indexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/serverControllers/indexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/serverControllers/provaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/serverControllers/provaController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/serverControllers/registerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/serverControllers/registerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/serverControllers/utilizadorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/serverControllers/utilizadorController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/socketServer.class.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/provas.php" beforeDir="false" afterPath="$PROJECT_DIR$/provas.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.php" beforeDir="false" afterPath="$PROJECT_DIR$/server.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utilizador.php" beforeDir="false" afterPath="$PROJECT_DIR$/utilizador.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,15 +16,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="provas.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/provas.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="66" column="4" lean-forward="true" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -44,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="utilizador.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="utilizador.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utilizador.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2355">
-              <caret line="157" column="37" selection-start-line="157" selection-start-column="37" selection-end-line="157" selection-end-column="37" />
+            <state relative-caret-position="555">
+              <caret line="157" column="103" selection-start-line="157" selection-start-column="103" selection-end-line="157" selection-end-column="103" />
             </state>
           </provider>
         </entry>
@@ -80,15 +59,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="provaController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/serverControllers/provaController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="51" column="49" lean-forward="true" selection-start-line="48" selection-start-column="8" selection-end-line="51" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="utilizadorController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/serverControllers/utilizadorController.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -107,11 +77,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="registerController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="registerController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/serverControllers/registerController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="390">
               <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="server.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="720">
+              <caret line="48" column="40" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="provaController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/serverControllers/provaController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-37">
+              <caret line="51" column="49" lean-forward="true" selection-start-line="48" selection-start-column="8" selection-end-line="51" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -183,11 +171,11 @@
         <option value="$PROJECT_DIR$/lib/serverControllers/provaController.php" />
         <option value="$PROJECT_DIR$/provas.php" />
         <option value="$PROJECT_DIR$/index.php" />
-        <option value="$PROJECT_DIR$/utilizador.php" />
         <option value="$PROJECT_DIR$/lib/serverControllers/utilizadorController.php" />
         <option value="$PROJECT_DIR$/lib/serverControllers/indexController.php" />
         <option value="$PROJECT_DIR$/functions/register.php" />
         <option value="$PROJECT_DIR$/lib/serverControllers/registerController.php" />
+        <option value="$PROJECT_DIR$/utilizador.php" />
       </list>
     </option>
   </component>
@@ -276,12 +264,12 @@
       <updated>1548244356324</updated>
       <workItem from="1548244357513" duration="12621000" />
       <workItem from="1548445922093" duration="41090000" />
-      <workItem from="1548860947690" duration="31558000" />
+      <workItem from="1548860947690" duration="32165000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85269000" />
+    <option name="totallyTimeSpent" value="85876000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
@@ -535,13 +523,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="48" column="40" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lidn.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -549,24 +530,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/serverControllers/provaController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="51" column="49" lean-forward="true" selection-start-line="48" selection-start-column="8" selection-end-line="51" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/provas.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="66" column="4" lean-forward="true" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utilizador.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2355">
-          <caret line="157" column="37" selection-start-line="157" selection-start-column="37" selection-end-line="157" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -621,6 +588,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="48" column="40" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/serverControllers/provaController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-37">
+          <caret line="51" column="49" lean-forward="true" selection-start-line="48" selection-start-column="8" selection-end-line="51" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utilizador.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="157" column="103" selection-start-line="157" selection-start-column="103" selection-end-line="157" selection-end-column="103" />
         </state>
       </provider>
     </entry>

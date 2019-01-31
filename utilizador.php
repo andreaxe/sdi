@@ -155,7 +155,7 @@ if(isset($_POST['dados_utilizador'])){
                 </div>
                 <div class="form-group">
                     <label for="datan">Data de Nascimento</label>
-                    <input type="date" class="form-control" name="datan" value="<?= $datan ?>">
+                    <input type="date" class="form-control" name="datan" value="<?= $datan ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="cc">Cartão de cidadão</label>
