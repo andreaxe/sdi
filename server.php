@@ -2,9 +2,11 @@
 
 $port = 8000;
 
-/*********function to check new order******************/
 function run_controller($route){
-    /* create controllers class instance & inject core */
+    /**
+     * create controllers class instance & inject core
+     */
+
     $controller = './lib/serverControllers/'.$route->controller.'Controller.php';
     if(file_exists($controller)) {
         require_once($controller);
@@ -16,19 +18,14 @@ function run_controller($route){
         require_once('./lib/serverControllers/not_foundController.php');
         $controller = new not_foundController();
     }
-    /* check the root class is callable */
     if (is_callable(array($controller, $route->action)) === false) {
-        /* index() method because not found method */
         $action = 'index';
     } else {
-        /* action() method is callable */
         $action = $route->action;
     }
-    /* run the action method */
     return $controller->{$action}();
 }
-/*************************************/
-/********Socket Server*********************/
+
 set_time_limit (0);
 // Set the ip and port we will listen on
 $address = '127.0.0.1';

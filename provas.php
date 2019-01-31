@@ -55,18 +55,13 @@ if(isset($_POST['prova'])){
 
         $packet = array('controller'=> 'prova', 'action' => 'inscreverProva',
             'args' => ['prova'=> $prova, 'user' => $id_utilizador, 'data'=> $data, 'limite'=>$limite]);
-        $results = json_decode($socket->send(json_encode($packet)));
 
-      if($results->success)
-      {
-          header("Refresh:0");
-      }
-      else
-      {
-          header('Location: '.$_SERVER['REQUEST_URI']);
-      }
+        // Enviar para o servidor inserir o user
+        $socket->send(json_encode($packet));
+        // aconteça o que acontecer "refrescar" a página
+        header('Location: '.$_SERVER['REQUEST_URI']);
+
     }
-
     header('Location: '.$_SERVER['REQUEST_URI']);
 }
 ?>

@@ -49,7 +49,8 @@ class utilizadorController{
         $uid = $this->args->args->uid;
         $email = $this->args->args->email;
 
-        $query = "UPDATE utilizador SET email ='".$email."', nome ='".$nome."', nif = '".$nif."', datan = '".$datan."',  cc = '".$cc."', telef = '".$telef."' WHERE idu = '".$uid."'";
+        $query = "UPDATE utilizador SET email ='".$email."', nome ='".$nome."', nif = '".$nif."', datan = '".$datan."'
+        ,  cc = '".$cc."', telef = '".$telef."' WHERE idu = '".$uid."'";
 
         if(mysqli_query($this->connection, $query)){
             return json_encode(array('success'=> 1));

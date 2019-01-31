@@ -37,7 +37,7 @@ Para colocar a funcionar este projecto é preciso seguir as instruções disponi
  
 * certificar-se que tem o docker instalado;
 * clonar este repositório para o seu computador;
-* Criar o container e correr através do seguinte comando: $ docker run --name app -d -p 8010:80 -v raiz/do/projecto:/var/www/app/ romeoz/docker-apache-php
+* Criar o container e correr através do seguinte comando: $ docker run --name app -d -p 8010:80 -v **raiz/do/projecto**:/var/www/app/ romeoz/docker-apache-php
 * Copiar para o clipboard o id do container disponivel na seguinte lista: $ docker ps
 * Aceder ao container através do seguinte comando: docker exec -it **id_do_container** bash
 
@@ -50,9 +50,10 @@ Depois de certificar-se que as notas prévias foram cumpridas, abrir o browser e
 * registar um utilizador e efectuar o login
 
 #### Notas prévias:
+* o docker apenas funciona em sistemas operativos linux ou windows 10 professional.
 * Instalar ou usar um servidor mysql já existente e importar o ficheiro 'cvp.sql' disponivel na raiz do projecto. 
 * Alterar as credenciais de acesso à BD no ficheiro 'ConnectDB.php'
-* Não se esqueça de alterar o caminho **'raiz/do/projecto'** pela raiz do directório onde se encontra o projecto na sua máquina local.
+* Não se esqueça de alterar o caminho **'raiz/do/projecto'** no momento da criação do container pela raiz do directório onde se encontra o projecto na sua máquina local.
 
 ##### Problemas na configuração do servidor através do docker
 
