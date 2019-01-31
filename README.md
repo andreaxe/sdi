@@ -57,7 +57,8 @@ Depois de certificar-se que as notas prévias foram cumpridas, abrir o browser e
 
 ##### Problemas na configuração do servidor através do docker
 
-Na eventualidade de não ser possivel o deploy do projecto através de um container docker, o mesmo deverá ser possivel correr através do servidor XAAMP ou mesmo configurando o apache, assumindo que as **notas prévias** são cumpridas.
+Na eventualidade de não ser possivel o deploy do projecto através de um container docker, o mesmo deverá ser possivel correr através do servidor XAMPP ou mesmo configurando o apache, assumindo que as configurações de acesso à base de dados são cumpridas 
+com a alteração do ficheiro **ConnectDB.php** disponivel nos exemplos.
 
 ### Considerações finais:
 
@@ -71,8 +72,6 @@ Foi possivel minimizar erros que poderiam surgir ao utilizador contudo não foi 
 
 Exemplos:
 =========
-
-[Alt text](./assets/img/braga.jpg?raw=true "Title")
 
 **./ConnectDB.php (Conexão à base de dados)**
 
@@ -92,18 +91,12 @@ Alterar as variáveis de classe existentes neste ficheiro para se conectar à su
         private static $_instance;
         private $_database = 'cvp'; // alterar SE o nome da BD for diferente
 
-
-[Alt text](./assets/img/braga.jpg?raw=true "Title")
-
 **./server.php (Servidor)**
 
 Caso seja necessário alterar a porta usada pelo socket deverá alterar a váriável $port
 
     <?php    
     $port = 8000;
-
-
-[Alt text](./assets/img/braga.jpg?raw=true "Title")
 
 **./lib/socketClient.class.php (Cliente)**
 
@@ -116,11 +109,7 @@ No caso do cliente deverá alterar no constructor da classe *socketClient*
     	function __construct($ip = "127.0.0.1", $port = 8000, $auth = false){
     		parent::__construct($ip, $port, $auth);
     	}
-
-
-
-[Alt text](./assets/img/braga.jpg?raw=true "Title")
-
+    	
 
 Exemplo de criação um array com a informação da classe, método e argumentos a serem executados pelo servidor:
 
