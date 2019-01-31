@@ -1,27 +1,22 @@
 <?php
 include('ConnectDB.php');
 session_start();
+
 if (!isset($_SESSION['token'])) {
     header("location:index.php");
 }
 
-$database = new ConnectDB();
-$connection = $database->db_connection;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require('./lib/socket.class.php');
 require('./lib/socketClient.class.php');
-$socket = new socketClient('127.0.0.1', 8000);
+$socket = new socketClient('127.0.0.1');
 
 if(!$socket->get_status()){
     // socket não está conectado!
     header('Location: logout.php');
 }
-//die();
-//if(empty($socket->response)){
-//    header('Location: index.php');
-//}
 
 $packet = array('controller'=> 'prova', 'action' => 'provaEvento',
     'args' => ['idu'=> $_SESSION['idu']]);
@@ -55,19 +50,23 @@ if(isset($_POST['prova'])){
     $results = json_decode($socket->send(json_encode($packet)));
 
     if($results->success){
-        header("Content-Type: text/json; charset=utf8");
-        $query = "INSERT INTO inscricoes(idutilizador, idprova, datainsc, datalimite)VALUES('$id_utilizador', '$prova','$data', '$limite')";
-        $inscricao = mysqli_query($connection , $query);
 
-      if($inscricao)
+        header("Content-Type: text/json; charset=utf8");
+
+        $packet = array('controller'=> 'prova', 'action' => 'inscreverProva',
+            'args' => ['prova'=> $prova, 'user' => $id_utilizador, 'data'=> $data, 'limite'=>$limite]);
+        $results = json_decode($socket->send(json_encode($packet)));
+
+      if($results->success)
       {
           header("Refresh:0");
       }
       else
       {
-        header("Refresh:0");
+          header('Location: '.$_SERVER['REQUEST_URI']);
       }
     }
+
     header('Location: '.$_SERVER['REQUEST_URI']);
 }
 ?>

@@ -6,7 +6,7 @@ if (!isset($_SESSION['token'])) {
 }
 require('./lib/socket.class.php');
 require('./lib/socketClient.class.php');
-$socket = new socketClient('127.0.0.1', 8000);
+$socket = new socketClient('127.0.0.1');
 
 if(!$socket->get_status()){
     // socket não está conectado!

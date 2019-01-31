@@ -105,4 +105,19 @@ class provaController{
 
         return json_encode($results);
     }
+
+    public function inscreverProva(){
+
+        $id_utilizador = $this->args->args->user;
+        $prova = $this->args->args->prova;
+        $data = $this->args->args->data;
+        $limite = $this->args->args->limite;
+
+        $query = "INSERT INTO inscricoes(idutilizador, idprova, datainsc, datalimite)VALUES('$id_utilizador', '$prova','$data', '$limite')";
+        if(mysqli_query($this->connection, $query)){
+            return json_encode(array('success'=> 1));
+        }
+        return json_encode(array('success'=> 0));
+
+    }
 }

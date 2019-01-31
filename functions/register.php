@@ -19,7 +19,7 @@ function createUser()
     require('../lib/socketClient.class.php');
 
     $username = $_POST['first_name']."_".$_POST['last_name'];
-    $socket = new socketClient('127.0.0.1', 8000);
+    $socket = new socketClient('127.0.0.1');
 
     if(!$socket->get_status()){
         // socket não está conectado!
@@ -34,6 +34,8 @@ function createUser()
 
     if($response->success == 1)
     {
+        session_start();
+        $_SESSION['user_criado'] = True;
         echo "<div class=\"alert alert-success\">";
         echo("Utilizador inserido com sucesso!");
         echo "</div>";

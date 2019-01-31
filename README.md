@@ -33,7 +33,7 @@ Apresentar uma versão para android; iphone; ou windows mobile da aplicação.
 
 Instruções para deploy do projecto
 ============
-Para colocar a funcionar este trabalho é preciso tomar os seguintes passos:
+Para colocar a funcionar este projecto é preciso seguir as instruções disponiveis nos seguintes passos:
  
 * certificar-se que tem o docker instalado;
 * clonar este repositório para o seu computador;
@@ -49,15 +49,14 @@ Depois de certificar-se que as notas prévias foram cumpridas, abrir o browser e
 * http://localhost:8010 
 * registar um utilizador e efectuar o login
 
-Notas prévias:
+#### Notas prévias:
 * Instalar ou usar um servidor mysql já existente e importar o ficheiro 'cvp.sql' disponivel na raiz do projecto. 
 * Alterar as credenciais de acesso à BD no ficheiro 'ConnectDB.php'
 * Não se esqueça de alterar o caminho **'raiz/do/projecto'** pela raiz do directório onde se encontra o projecto na sua máquina local.
 
-
 ##### Problemas na configuração do servidor através do docker
 
-Na eventualidade de não ser possivel o deploy do projecto através de um container docker, o mesmo deverá ser possivel correr o mesmo através do servidor XAAMP ou mesmo configurando o apache, assumindo que as **notas prévias** são cumpridas.
+Na eventualidade de não ser possivel o deploy do projecto através de um container docker, o mesmo deverá ser possivel correr através do servidor XAAMP ou mesmo configurando o apache, assumindo que as **notas prévias** são cumpridas.
 
 ### Considerações finais:
 
@@ -71,26 +70,71 @@ Foi possivel minimizar erros que poderiam surgir ao utilizador contudo não foi 
 
 Exemplos:
 =========
+
 [Alt text](./assets/img/braga.jpg?raw=true "Title")
 
-**./index.php (Client)**
-Cliente cria um array com a informação do Controlador e método a ser evocado no servidor
+**./ConnectDB.php (Conexão à base de dados)**
+
+Alterar as variáveis de classe existentes neste ficheiro para se conectar à sua base de dados.
+
+    class ConnectDB{
+        /**
+         * @var bool|mysqli
+         * Alterar aqui as credenciais de acesso à Base de dados
+         */
+    
+        public $db_connection = false;
+        public $logs = array();
+        private $_servername = "172.17.0.1"; // alterar
+        private $_username = "andre"; // alterar
+        private $_password = "andre"; // alterar
+        private static $_instance;
+        private $_database = 'cvp'; // alterar SE o nome da BD for diferente
+
+
+[Alt text](./assets/img/braga.jpg?raw=true "Title")
+
+**./server.php (Servidor)**
+
+Caso seja necessário alterar a porta usada pelo socket deverá alterar a váriável $port
+
+    <?php    
+    $port = 8000;
+
+
+[Alt text](./assets/img/braga.jpg?raw=true "Title")
+
+**./lib/socketClient.class.php (Cliente)**
+
+No caso do cliente deverá alterar no constructor da classe *socketClient*
+
+    Class socketClient extends socket{
+    
+        private $connected = True;
+    
+    	function __construct($ip = "127.0.0.1", $port = 8000, $auth = false){
+    		parent::__construct($ip, $port, $auth);
+    	}
+
+
+
+[Alt text](./assets/img/braga.jpg?raw=true "Title")
+
+
+Exemplo de criação um array com a informação da classe, método e argumentos a serem executados pelo servidor:
 
     <?php
     require('./lib/socket.class.php');
     require('./lib/socketClient.class.php');
     
     $socket = new socketClient('127.0.0.1', 8000);
-    // sem envio de argumentos 
-    $packet = array('controller'=> 'index', 'action' => 'provaEvento');
-    // com argumentos
+    
     $packet = array('controller' => 'index', 'action' => 'login', 
                     'args' => ['email'=> $_POST['email'], 'pass' => $_POST['password']]);
     $results = json_decode($socket->send(json_encode($packet)));
     
     $response = $socket->send(json_encode($packet));
-    
-    $socket->report();
+        
     ?>
 
 Servidor
@@ -100,7 +144,7 @@ Servidor
     
        <?php
        
-       // Funcão para nova rota
+       // Funcão que encaminha o pedido para o controlador respectivo
        function run_controller($route){
            /* create controllers class instance & inject core */
            $controller = './lib/serverControllers/'.$route->controller.'Controller.php';

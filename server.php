@@ -1,5 +1,7 @@
 <?php
 
+$port = 8000;
+
 /*********function to check new order******************/
 function run_controller($route){
     /* create controllers class instance & inject core */
@@ -30,7 +32,6 @@ function run_controller($route){
 set_time_limit (0);
 // Set the ip and port we will listen on
 $address = '127.0.0.1';
-$port = 8000;
 // Create a TCP Stream socket
 $sock = socket_create(AF_INET, SOCK_STREAM, 0); // 0 for  SQL_TCP
 // Bind the socket to an address/port

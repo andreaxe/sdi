@@ -39,7 +39,7 @@ session_start();
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#"><img class="img-responsive" src="assets/img/run_logo.png"/></a>
+			<a class="navbar-brand" href="index.php"><img class="img-responsive" src="assets/img/run_logo.png"/></a>
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
@@ -162,6 +162,11 @@ session_start();
 
 					</form>
 					<hr>
+
+                        <?php if(isset($_SESSION['user_criado'])){
+                            echo "<div class=\"alert alert-success\" role=\"alert\">Utilizador criado com sucesso!</div>";
+                            unset($_SESSION['user_criado']);
+                        }?>
 					<p>O registo é efectuado na nossa plataforma através do gestor do clube de atletismo.
 						Contudo poderá efectuar um pedido de registo nesta área ao que o mesmo será avaliado e aprovado pelo nosso gestor. </p>
 				</div>

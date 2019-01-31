@@ -1,17 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: andre
- * Date: 26-01-2019
- * Time: 14:59
- */
+
 
 if (isset($_POST['email']) && isset($_POST['password'])) {
 
     require('../lib/socket.class.php');
     require('../lib/socketClient.class.php');
 
-    $socket = new socketClient('127.0.0.1', 8000);
+    $socket = new socketClient('127.0.0.1');
 
     if(!$socket->get_status()){
         // socket não está conectado!
