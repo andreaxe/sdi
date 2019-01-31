@@ -1,8 +1,11 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>ATW</title>
+	<title>SDI</title>
 	<meta name="description" content="The HTML5 Herald">
 	<meta name="author" content="SitePoint">
 	<!-- Bootstrap v3-->
@@ -48,7 +51,13 @@
 				</li>
 				<li>
 					<p class="navbar-btn">
+                        <?php
+                        if(!isset($_SESSION['idu'])) { ?>
 						<a href="#" id="login" class="btn btn-success login" style="color: #FFF !important;" data-toggle="modal" data-target="#myModal">Login</a>
+                        <?php }  else { ?>
+                            <a href="#" id="login" class="btn btn-success login" style="color: #FFF !important;" data-toggle="modal" data-target="#myModal">Provas</a>
+                            <a href="#" id="login" class="btn btn-success login" style="color: #FFF !important;" data-toggle="modal" data-target="#myModal">Definições</a>
+                        <?php }?>
 					</p>
 				</li>
 			</ul>
@@ -115,7 +124,7 @@
 					<h3 class="panel-title">Junte-se no nosso <strong>clube</strong></h3>
 				</div>
 				<div class="panel-body">
-					<form role="form">
+                    <form id="loginForm" method="POST" action="functions/register.php" novalidate="novalidate">
 						<div class="row">
 							<div class="col-xs-6 col-sm-6 col-md-6">
 								<div class="form-group">

@@ -49,5 +49,9 @@ Class socketClient extends socket{
 		return false;
 	}
 
+	function close(){
+	    $this->socket = $this->socket_close();
+    }
+
 }
 ?>

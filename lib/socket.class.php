@@ -4,7 +4,7 @@
 */
 class socket{
 	public $ip 		 = "0.0.0.0";
-	public $port 	 = 4000;
+	public $port 	 = 8000;
 	public $action   = array();
 	public $log      = array();
 	public $response = array();
@@ -12,7 +12,7 @@ class socket{
 	public $clients  = array();
 	public $pool     = array();
 
-	function __construct($ip = "0.0.0.0", $port = 4000){
+	function __construct($ip = "0.0.0.0", $port = 8000){
 		$this->ip 	= $ip;
 		$this->port = $port;
 	}
@@ -31,45 +31,46 @@ class socket{
 		return @call_user_func_array($method, $params);
 	}
 
+
 	function __destruct(){
 		if(is_resource($this->socket)) $this->socket_close($this->socket);
 	}
 	
 	function report(){
 		echo '
-<style type="text/css">
-* {
-	padding:0;
-	margin:0;
-}
-div.log {
-	width:700px;
-	padding: 4px 10px 4px 10px;
-	background-color: #f88;
-	border: 1px solid #f00;
-	margin:25px auto;
-}
-div.log span {
-	font-family: monospace;
-}
-</style>
-
-'.implode(PHP_EOL, $this->log).'
-';
+            <style type="text/css">
+                * {
+                    padding:0;
+                    margin:0;
+                }
+                div.log {
+                    width:700px;
+                    padding: 4px 10px 4px 10px;
+                    background-color: #f88;
+                    border: 1px solid #f00;
+                    margin:25px auto;
+                }
+                div.log span {
+                    font-family: monospace;
+                }
+            </style>
+            
+            '.implode(PHP_EOL, $this->log).'
+            ';
 	}
 
 	protected function log($reason, $extra, $return = false){
 		$errMsg = $this->socket_strerror($this->socket_last_error($this->socket));
 
 		$log = '
-	<div class="log">
-		<h1>'.$reason.'</h1>
-		<p><strong>Message:</strong>
-			<span>'.$extra.'</span>
-			<br>
-			<span>'.$errMsg.'</span>
-		</p>
-	</div>'.PHP_EOL;
+        <div class="log">
+            <h1>'.$reason.'</h1>
+            <p><strong>Message:</strong>
+                <span>'.$extra.'</span>
+                <br>
+                <span>'.$errMsg.'</span>
+            </p>
+        </div>'.PHP_EOL;
 		
 		if($return == true){
 			 return $log; 

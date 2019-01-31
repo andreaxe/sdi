@@ -97,11 +97,13 @@ class indexController{
         fclose($fp);
 
         if(!$row){
-            $response = array('success'=> 0, 'msg' => 'No existing user or wrong password');
+            $response = array('success'=> 0, 'msg' => 'No existing user or wrong password',
+                'password_hash' => $password);
         }
         else
         {
-            $response = array('success' => 1, 'token' => bin2hex(random_bytes(78)));
+            $response = array('success' => 1, 'token' => bin2hex(random_bytes(78)),
+                'idu'=> $row->idu, 'nome'=> $row->nome);
             /*if($admin){
                 header("location: private/backend/index.php");
             }
