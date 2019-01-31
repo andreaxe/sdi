@@ -13,6 +13,11 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
     $socket = new socketClient('127.0.0.1', 8000);
 
+    if(!$socket->get_status()){
+        // socket não está conectado!
+        header('Location: ../logout.php');
+    }
+
     $packet = array('controller'    => 'index',
         'action'	=> 'login',
         'args' => ['email'=> $_POST['email'], 'pass' => $_POST['password']]);

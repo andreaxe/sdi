@@ -2,14 +2,18 @@
 
 
 class ConnectDB{
+    /**
+     * @var bool|mysqli
+     * Alterar aqui as credenciais de acesso à Base de dados
+     */
 
     public $db_connection = false;
     public $logs = array();
-    private $_servername = "172.17.0.1";
-    private $_username = "andre";
-    private $_password = "andre";
-    private static $_instance; //The single instance
-    private $_database = 'cvp';
+    private $_servername = "172.17.0.1"; // alterar
+    private $_username = "andre"; // alterar
+    private $_password = "andre"; // alterar
+    private static $_instance;
+    private $_database = 'cvp'; // alterar SE o nome da BD for diferente
 
 
     public function __construct() {

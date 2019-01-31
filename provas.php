@@ -14,6 +14,10 @@ require('./lib/socket.class.php');
 require('./lib/socketClient.class.php');
 $socket = new socketClient('127.0.0.1', 8000);
 
+if(!$socket->get_status()){
+    // socket não está conectado!
+    header('Location: logout.php');
+}
 //die();
 //if(empty($socket->response)){
 //    header('Location: index.php');
@@ -137,7 +141,7 @@ if(isset($_POST['prova'])){
 <div class="container">
 
   <div class="row">
-    <div class="col-sm-9">
+    <div class="col-sm-12">
       <h3 class="titulo">Lista de Provas e Eventos</h3>
       <table id="prova" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
@@ -172,10 +176,10 @@ if(isset($_POST['prova'])){
         </tbody>
       </table>
     </div>
-    <div class="col-sm-3">
-      <h3 class="titulo">Localizações</h3>
-      <div id="map"></div>
-    </div>
+<!--    <div class="col-sm-3">-->
+<!--      <h3 class="titulo">Localizações</h3>-->
+<!--      <div id="map"></div>-->
+<!--    </div>-->
   </div>
 
   <div class="row">

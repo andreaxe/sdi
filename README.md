@@ -31,10 +31,42 @@ Aspetos a Avaliar:
 Valorização:
 Apresentar uma versão para android; iphone; ou windows mobile da aplicação.
 
-Docker 
-------------------
-1. docker run --name app -d -p 8010:80 -v home/afg/Documents/SDI:/var/www/app/ romeoz/docker-apache-php
-2. docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql:latest
+Instruções para deploy do projecto
+============
+Para colocar a funcionar este trabalho é preciso tomar os seguintes passos:
+ 
+* certificar-se que tem o docker instalado;
+* clonar este repositório para o seu computador;
+* Criar o container e correr  através do seguinte comando: $ docker run --name app -d -p 8010:80 -v raiz/do/projecto:/var/www/app/ romeoz/docker-apache-php
+* Registar o id do container na lista através do seguinte comando: $ docker ps
+* docker exec -it {id do cotnainer} bash
+
+No interior do container correr o servidor:
+* php server.php
+
+Depois de certificar-se que as notas prévias foram cumpridas, abrir o browser e consultar o seguinte endereço:
+
+* http://localhost:8010 
+
+Notas prévias:
+* Instalar um servidor mysql e importar o ficheiro 'cvp.sql' 
+* Alterar as credenciais de acesso à BD no ficheiro 'ConnectDB.php'
+* Não se esqueça de alterar o caminho **'raiz/do/projecto'** pela raiz do directório onde se encontra o projecto na sua máquina local.
+
+
+##### Problemas na configuração do servidor através do docker
+
+Na eventualidade de não ser possivel o deploy do projecto através de um container docker, o mesmo deverá ser possivel correr o mesmo através do servidor XAAMP ou mesmo configurando o apache, assumindo que as **notas prévias** são cumpridas.
+
+### Considerações finais:
+
+* Foram cumpridas todos os requisitos propostos contudo apenas há um aspecto que não foi possivel melhorar (conforme detectado na apresentação prévia) que tem a ver com o redireccionamento automático em situações em que o servidor socket se encontra indisponivel.
+Foi possivel minimizar erros que poderiam surgir ao utilizador contudo não foi possivel em tempo útil melhorar muito mais nesse aspecto.
+
+* A aplicação cliente após autenticação correcta no servidor de sockets, regista uma sessão que permite navegar por entre as páginas autenticado e efectuar pedidos ao servidor socket. Contudo em caso de anomalia no servidor socket o comportamento não é o ideal (vai de encontro à problemática do ponto anterior).
+
+* Quantos aos aspectos positivos, a aplicação foi desenhada tendo em consideração uma interface responsive ideal para se adaptar a qualquer dispositivo (desktop, mobile). Todos os aspectos funcionais do site funcionam de acordo com o proposto e não se detectou anomalias durante a navegação, provando-se consistente. 
+ 
 
 Exemplos:
 =========

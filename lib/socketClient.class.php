@@ -1,6 +1,8 @@
 <?php 
 Class socketClient extends socket{
 
+    private $connected = True;
+
 	function __construct($ip = "127.0.0.1", $port = 8000, $auth = false){
 		parent::__construct($ip, $port, $auth);
 	}
@@ -15,14 +17,20 @@ Class socketClient extends socket{
 			}
 			// connect to server
 			if($this->socket_connect($this->socket, $this->ip, $this->port)){
+                $this->connected = True;
 				$this->log("Client: socket::socket_connect()", "socket connected");
 			}else{
-				$this->log("Client: socket::socket_connect()", "error connecting to server");
+                $this->connected = False;
+                $this->log("Client: socket::socket_connect()", "error connecting to server");
 			}
 		}catch(Exception $e){
 			$this->log("Error:", $e->getMessage());
 		}
 	}
+
+	function get_status(){
+	    return $this->connected;
+    }
 
 	function send($message){
 		//

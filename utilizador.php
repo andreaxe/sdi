@@ -7,10 +7,11 @@ if (!isset($_SESSION['token'])) {
 require('./lib/socket.class.php');
 require('./lib/socketClient.class.php');
 $socket = new socketClient('127.0.0.1', 8000);
-//die();
-//if(empty($socket->response)){
-//    header('Location: index.php');
-//}
+
+if(!$socket->get_status()){
+    // socket não está conectado!
+    header('Location: logout.php');
+}
 
 $packet = array('controller'=> 'utilizador', 'action' => 'consultaUtilizador',
     'args' => ['idu'=> $_SESSION['idu']]);
@@ -117,10 +118,10 @@ if(isset($_POST['dados_utilizador'])){
                     <th>Nome</th>
                     <th>Nif</th>
                     <th>Data de Nascimento</th>
-                    <th>Localidade</th>
                     <th>Email</th>
                     <th>CC</th>
                     <th>Telefone</th>
+                    <th>Localidade</th>
                 </tr>
                 </thead>
                 <tbody>
